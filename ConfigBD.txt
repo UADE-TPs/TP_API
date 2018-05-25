@@ -1,0 +1,5 @@
+jdbc=jdbc:sqlserver://
+servidor=localhost:1433;instance=MSSQLSERVER
+usuario=sa
+password=sa
+conexiones=1
