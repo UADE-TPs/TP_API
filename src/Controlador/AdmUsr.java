@@ -32,7 +32,7 @@ public class AdmUsr {
 		//Verificar que no exista en la BD
 		Usuario u = MapperUsuario.getInstancia().buscarUsuario(d);
 		if (u == null) {
-			u = new Usuario(d,n,a,fn,m, p, true);
+			u = new Usuario(d,n,a,fn,m, p);
 			usuarios.addElement(u);
 			return 1;
 		}
@@ -52,7 +52,7 @@ public class AdmUsr {
 	{
 		//Cerrar todas listas que administras
 		//Sacar de todas las listas que participa
-		return MapperUsuario.getInstancia().bajaUsr(loggedUsr.getDni());
+		return loggedUsr.bajaUsr();
 	}
 	
 	public Usuario loggedUsr ()

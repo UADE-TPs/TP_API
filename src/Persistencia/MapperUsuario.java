@@ -63,6 +63,7 @@ public class MapperUsuario {
 		}
 		catch (Exception e)
 		{
+			System.out.println("Error en MapperUsusario - insert");
 			e.printStackTrace();
 		}
 	}
@@ -93,6 +94,7 @@ public class MapperUsuario {
 		catch (Exception e)
 		{
 			System.out.println("Error en MapperUsusario - BuscarUsusario");
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -128,7 +130,6 @@ public class MapperUsuario {
 	}
 	
 	public int bajaUsr (int dni) {
-		
 		try
 		{
 			Connection con = PoolConnection.getPoolConnection().getConnection();

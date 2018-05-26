@@ -16,7 +16,20 @@ public class Usuario {
 	private boolean estado; // True=activo / False=dado de baja
 	
 	
-	public Usuario(int dni, String nombre, String apellido, Date fechaNacimiento, String mail, String password, boolean estado) {
+	public Usuario (int dni, String nombre, String apellido, Date fechaNacimiento, String mail, String password) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.fechaNacimiento = fechaNacimiento;
+		this.mail = mail;
+		this.password = password;
+		this.estado = true;
+		
+		MapperUsuario.getInstancia().insert(this);
+	}
+
+	public Usuario (int dni, String nombre, String apellido, Date fechaNacimiento, String mail, String password, boolean estado) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -26,10 +39,14 @@ public class Usuario {
 		this.password = password;
 		this.estado = estado;
 		
-		MapperUsuario.getInstancia().insert(this);
+	}
+	public int bajaUsr() {
+		this.setEstado(false);
+		return MapperUsuario.getInstancia().bajaUsr(this.dni);
 	}
 
-
+	
+	
 	public int getDni() {
 		return dni;
 	}
@@ -78,7 +95,7 @@ public class Usuario {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-
+	
 	public String getPassword() {
 		return password;
 	}
