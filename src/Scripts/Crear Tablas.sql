@@ -24,7 +24,7 @@ CREATE TABLE Pagos (
 
 CREATE TABLE Agasajados (
 	idAgasagado INT NOT NULL,
-	nombre VARCHAR(60) NOT NULL,
+	nombreAgasajado VARCHAR(60) NOT NULL,
 	fechaAgasajo DATE NOT NULL,
 	email VARCHAR(60) NOT NULL,
 	monto float NOT NULL,
@@ -33,6 +33,7 @@ CREATE TABLE Agasajados (
 
 CREATE TABLE Listas (
 	codLista INT NOT NULL,
+	nombreLista VARCHAR(60) NOT NULL,
 	dniAdmin INT NOT NULL,
 	fechaInicio DATE NOT NULL,
 	fechaFin DATE NOT NULL,
