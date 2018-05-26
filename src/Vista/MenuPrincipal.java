@@ -51,6 +51,17 @@ public class MenuPrincipal extends JFrame {
 		mnConfiguracin.add(mntmMisDatos);
 		
 		JMenuItem mntmBaja = new JMenuItem("Baja");
+		mntmBaja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (JOptionPane.showConfirmDialog(null, "¿Estás seguro que deseas darte de baja?", "Baja", JOptionPane.YES_NO_OPTION) == 0) {
+					if (AdmUsr.getInstancia().bajaUsr() == 1 ) {
+							PoolConnection.getPoolConnection().closeConnections();
+							System.exit(0);
+						}
+					}
+				}
+		});
+		
 		mnConfiguracin.add(mntmBaja);
 		
 		JMenu mnSistema = new JMenu("Sistema");

@@ -12,6 +12,7 @@ import Persistencia.PoolConnection;
 
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -23,8 +24,8 @@ import java.awt.event.ActionEvent;
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField docTxtField;
+	private JPasswordField passField;
 	private AdmUsr admUsr;
 
 	
@@ -56,22 +57,22 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(33, 85, 89, 14);
-		contentPane.add(lblUsuario);
+		JLabel lblDoc = new JLabel("N\u00B0 Documento");
+		lblDoc.setBounds(33, 85, 89, 14);
+		contentPane.add(lblDoc);
 		
-		textField = new JTextField();
-		textField.setBounds(148, 82, 212, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		docTxtField = new JTextField();
+		docTxtField.setBounds(148, 82, 212, 20);
+		contentPane.add(docTxtField);
+		docTxtField.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Contrase\u00F1a");
 		lblPassword.setBounds(33, 115, 89, 14);
 		contentPane.add(lblPassword);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(148, 112, 212, 20);
-		contentPane.add(passwordField);
+		passField = new JPasswordField();
+		passField.setBounds(148, 112, 212, 20);
+		contentPane.add(passField);
 		
 		JLabel lblIngresTuUsuario = new JLabel("Ingres\u00E1 tu usuario y contrase\u00F1a");
 		lblIngresTuUsuario.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -82,11 +83,15 @@ public class Login extends JFrame {
 		JButton btnIngresar = new JButton("Iniciar Sesi\u00F3n");
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Verificar usr y contraseña 
-				
-				MenuPrincipal menuPpal = new MenuPrincipal();
-				menuPpal.setLocationRelativeTo(null);
-				menuPpal.setVisible(true);
+				//Verificar usr y contraseña
+				if (AdmUsr.getInstancia().logIn(Integer.parseInt(docTxtField.getText()),new String(passField.getPassword())) == 1) {
+					MenuPrincipal menuPpal = new MenuPrincipal();
+					menuPpal.setLocationRelativeTo(null);
+					menuPpal.setVisible(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(null,  "Usuario o contraseña inválidos");
+				}
 				
 			}
 		});

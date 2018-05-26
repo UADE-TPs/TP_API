@@ -41,7 +41,7 @@ public class MapperUsuario {
 		return null;
 	}
 	
-	
+
 	public void insert (Usuario u)
 	{
 		try
@@ -67,7 +67,6 @@ public class MapperUsuario {
 		}
 	}
 	
-	//EN DESARROLLO!!!!!
 	public Usuario buscarUsuario (int dni)
 	{
 		try
@@ -93,8 +92,55 @@ public class MapperUsuario {
 		}
 		catch (Exception e)
 		{
-			System.out.println();
+			System.out.println("Error en MapperUsusario - BuscarUsusario");
 		}
 		return null;
+	}
+	
+	public Usuario verificarUsrPass (int dni, String pass)
+	{
+		try
+		{
+			Usuario u = null;
+			Connection con = PoolConnection.getPoolConnection().getConnection();
+			PreparedStatement s = con.prepareStatement("select * from API.dbo.Usuarios where dni = ? and pass =? and estado = 1");
+			s.setLong(1,dni);
+			s.setString(2, pass);
+			ResultSet result = s.executeQuery();
+			while (result.next())
+			{
+				String nom = result.getString(2);
+				String ape = result.getString(3);
+				Date fn = result.getDate(4);
+				String mail = result.getString(5);
+				Boolean est = result.getBoolean(7);
+				u = new Usuario(dni, nom, ape, fn,  mail, pass, est);
+			}
+			
+			PoolConnection.getPoolConnection().realeaseConnection(con);
+			return u;
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error en MapperUsusario - VerificarUsrPass");
+		}
+		return null;
+	}
+	
+	public int bajaUsr (int dni) {
+		
+		try
+		{
+			Connection con = PoolConnection.getPoolConnection().getConnection();
+			PreparedStatement s = con.prepareStatement("update API.dbo.Usuarios set estado = 0 where dni = ?");
+			s.setLong(1,dni);
+			PoolConnection.getPoolConnection().realeaseConnection(con);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error en MapperUsusario - BajaUsr");
+		}
+		return 0;
 	}
 }
