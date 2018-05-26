@@ -44,8 +44,6 @@ public class Usuario {
 		this.setEstado(false);
 		return MapperUsuario.getInstancia().bajaUsr(this.dni);
 	}
-
-	
 	
 	public int getDni() {
 		return dni;

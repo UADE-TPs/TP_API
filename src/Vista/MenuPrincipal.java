@@ -48,6 +48,13 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnConfiguracin);
 		
 		JMenuItem mntmMisDatos = new JMenuItem("Mis Datos");
+		mntmMisDatos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModifDatosUsr modifUsr = new ModifDatosUsr();
+				modifUsr.setLocationRelativeTo(null);
+				modifUsr.setVisible(true);
+			}
+		});
 		mnConfiguracin.add(mntmMisDatos);
 		
 		JMenuItem mntmBaja = new JMenuItem("Baja");

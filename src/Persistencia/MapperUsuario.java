@@ -125,6 +125,7 @@ public class MapperUsuario {
 		catch (Exception e)
 		{
 			System.out.println("Error en MapperUsusario - VerificarUsrPass");
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -135,12 +136,37 @@ public class MapperUsuario {
 			Connection con = PoolConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con.prepareStatement("update API.dbo.Usuarios set estado = 0 where dni = ?");
 			s.setLong(1,dni);
+			s.execute();			
 			PoolConnection.getPoolConnection().realeaseConnection(con);
 			return 1;
 		}
 		catch (Exception e)
 		{
 			System.out.println("Error en MapperUsusario - BajaUsr");
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public int modificarDatosUsr (Usuario u) {
+		try
+		{
+			Connection con = PoolConnection.getPoolConnection().getConnection();
+			PreparedStatement s = con.prepareStatement("update API.dbo.Usuarios set nombre = ?, apellido = ?, fechaNacimiento = ?, mail = ?, pass = ? where dni = ?");
+			s.setString(1,u.getNombre());
+			s.setString(2,u.getApellido());
+			s.setDate(3,u.getFechaNacimiento());
+			s.setString(4,u.getMail());
+			s.setString(5,u.getPassword());
+			s.setLong(6,u.getDni());
+			s.execute();			
+			PoolConnection.getPoolConnection().realeaseConnection(con);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error en MapperUsusario - modificarDatosUsr");
+			e.printStackTrace();
 		}
 		return 0;
 	}

@@ -47,8 +47,6 @@ public class Login extends JFrame {
 	 */
 	public Login() {	
 		
-		admUsr = AdmUsr.getInstancia();
-		
 		setTitle("Sistema Lista de Regalos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

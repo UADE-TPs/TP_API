@@ -60,29 +60,14 @@ public class AdmUsr {
 		return loggedUsr;
 	}
 	
-	public void modificarNombre (Usuario u, String n)
+	public int modificarDatosUsr (String nomb, String ape, Date fchNac, String mail, String pass )
 	{
-		
-	}
-	
-	public void modificarApellido (Usuario u, String a)
-	{
-		
-	}
-	
-	public void modificarFechaNacimiento (Usuario u, Date f)
-	{
-		
-	}
-	
-	public void modificarMail (Usuario u, String m)
-	{
-		
-	}
-	
-	public void modificarPassword (Usuario u, String p)
-	{
-		
+		loggedUsr.setNombre(nomb);
+		loggedUsr.setApellido(ape);
+		loggedUsr.setFechaNacimiento(fchNac);
+		loggedUsr.setMail(mail);
+		loggedUsr.setPassword(pass);
+		return MapperUsuario.getInstancia().modificarDatosUsr(loggedUsr);
 	}
 
 	
