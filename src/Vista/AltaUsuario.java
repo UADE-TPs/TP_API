@@ -137,9 +137,14 @@ public class AltaUsuario extends JFrame {
 									if(VerificarEmail(txtEmail.getText(), txtEmailConf.getText())) {
 										if(VerificarPass(passField.getPassword(), passFieldConf.getPassword())) {
 											//System.out.println("pass ok -- ALTA");
-											admUsr.generarUsr(Integer.parseInt(txtDoc.getText()), txtNom.getText(), txtApe.getText(), sqldate, txtEmail.getText(), passField.getPassword());
-											JOptionPane.showMessageDialog(null,  "Usuario dado de alta correctamente");
-											dispose(); 
+											if (admUsr.generarUsr(Integer.parseInt(txtDoc.getText()), txtNom.getText(), txtApe.getText(), sqldate, txtEmail.getText(), passField.getPassword())==1) {
+												JOptionPane.showMessageDialog(null,  "Usuario dado de alta correctamente");
+												dispose(); 
+											}
+											else {
+												JOptionPane.showMessageDialog(null,  "El usuario ingresado ya existe. No fue dado de alta");
+											}
+											
 										 }
 										else {
 											passField.setText(null);

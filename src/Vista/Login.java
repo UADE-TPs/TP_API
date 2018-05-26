@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controlador.AdmUsr;
+import Modelo.Usuario;
 import Persistencia.PoolConnection;
 
 import javax.swing.JTextPane;
@@ -26,6 +27,7 @@ public class Login extends JFrame {
 	private JPasswordField passwordField;
 	private AdmUsr admUsr;
 
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -81,6 +83,7 @@ public class Login extends JFrame {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Verificar usr y contraseña 
+				
 				MenuPrincipal menuPpal = new MenuPrincipal();
 				menuPpal.setLocationRelativeTo(null);
 				menuPpal.setVisible(true);
@@ -92,7 +95,7 @@ public class Login extends JFrame {
 		
 		JButton btnOlvidContrasea = new JButton("Olvid\u00E9 mi contrase\u00F1a");
 		btnOlvidContrasea.addActionListener(new ActionListener() {
-			//Ir a la pantalla de recupero de contraseña
+			//Ir a la pantalla RecuperoContraseña
 			public void actionPerformed(ActionEvent e) {
 				 System.out.println("Falta programar");
 			}
@@ -102,7 +105,7 @@ public class Login extends JFrame {
 		
 		JButton btnRegistrarme = new JButton("Soy nuevo!");
 		btnRegistrarme.addActionListener(new ActionListener() {
-			//Ir a la pantalla de alta de usuario
+			//Ir a la pantalla de AltaUsuario
 			public void actionPerformed(ActionEvent e) {
 				AltaUsuario altausr = new AltaUsuario();
 				altausr.setLocationRelativeTo(null);

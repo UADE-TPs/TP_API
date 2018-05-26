@@ -79,7 +79,6 @@ public class MapperUsuario {
 			ResultSet result = s.executeQuery();
 			while (result.next())
 			{
-				int cod = result.getInt(1);
 				String nom = result.getString(2);
 				String ape = result.getString(3);
 				Date fn = result.getDate(4);
