@@ -42,36 +42,74 @@ public class Lista {
 		this.estadoLista=false;
 		//return MapperLista.getInstancia().bajaLista(this.codLista);
 	}
-	//Getters
+	//Getters/Setters
 	public int getCodigo() {
 		return codLista;
 	}
+	public void setCodigo(int cod) {
+		this.codLista= cod;
+	}
+	
 	public Usuario getAdmin() {
 		return admin;
 	}
+	public void setAdmin(Usuario u) {
+		this.admin= u;
+	}
+
 	public float getMonto() {
 		return montoARecaudar;
 	}
+	public void setMonto(float m) {
+		this.montoARecaudar=m;
+	}
+
 	public Date getfechaInicio() {
 		return fechaInicio;
 	}
+	public void setfechaInicio(Date fi) {
+		this.fechaInicio=fi;
+	}
+
 	public Date getFechaFin() {
 		return fechaFin;
 	}
+	public void setFechaFin(Date ff) {
+		this.fechaFin=ff;
+	}
+
 	public Date getFechaAgasajo() {
 		return fechaAgasajo;
 	}
+	public void setFechaAgasajo(Date fa)
+	{
+		this.fechaAgasajo=fa;
+	}
+
 	public String getNombreAgasajado() {
 		return nombreAgasajado;
 	}
+	public void setNombreAgasajado(String n) {
+		this.nombreAgasajado=n;
+	}
+
 	public String getMailAgasajado() {
 		return mailAgasajado;
 	}
+	public void setMailAgasajado(String m) {
+		this.mailAgasajado=m;
+	}
+
 	public boolean getEstadoLista() {
 		return true;
 	}
+	public void setEstadoLista() {
+		this.estadoLista=true;
+	}
+
 	public ItemLista getItemLista() {
 		return null;
+			
 	}
 	
 	/*
