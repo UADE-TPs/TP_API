@@ -14,7 +14,7 @@ public class AdmLista {
 	
 	private Vector<Lista> listas;
 	private static AdmLista instancia;
-	
+	private Lista l;
 	
 	private AdmLista(){
 		listas = MapperLista.getInstancia().selectAll();
@@ -40,6 +40,30 @@ public class AdmLista {
 		return 0;
 		
 	}
+
+	public int  bajaLista ()
+	{
+		//Cambiar el estad de la lista a inactiva
+		return 0;
+	}
+	public Lista buscarLista(int c)
+	{
+		return MapperLista.getInstancia().buscarLista(c);
+	}
+	
+	public int modificarLista (int cod, int monto, Date fchIni, Date fechFin, Date fechAga,
+			String nomAga, String mailAga)
+	{
+		l=buscarLista(cod);
+		l.setMonto(monto);
+		l.setfechaInicio(fchIni);
+		l.setFechaFin(fechFin);
+		l.setFechaAgasajo(fechAga);
+		l.setMailAgasajado(mailAga);
+	
+		return MapperLista.getInstancia().modificarDatosLista(l);
+	}
+
 
 
 
