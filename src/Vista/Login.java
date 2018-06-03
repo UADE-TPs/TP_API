@@ -36,6 +36,7 @@ public class Login extends JFrame {
 					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {
+					System.out.println("Error en Sistema de Regalos - main");
 					e.printStackTrace();
 				}
 			}
@@ -119,3 +120,4 @@ public class Login extends JFrame {
 		contentPane.add(btnRegistrarme);
 	}
 }
+

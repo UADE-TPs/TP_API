@@ -49,7 +49,7 @@ CREATE TABLE ItemsLista (
 	codItem INT NOT NULL,
 	codLista INT NOT NULL,
 	dniParticipante INT NOT NULL,
-	idPago INT NOT NULL,
+	idPago INT NULL,
 		CONSTRAINT Item_PK PRIMARY KEY(codLista, codItem ),
 		CONSTRAINT ItemList_FK FOREIGN KEY(codLista) REFERENCES Listas (codLista),
 		CONSTRAINT ItemUsr_FK FOREIGN KEY(dniParticipante) REFERENCES Usuarios (dni),

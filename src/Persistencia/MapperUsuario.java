@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.Vector;
 
 import Modelo.Usuario;
@@ -171,3 +170,4 @@ public class MapperUsuario {
 		return 0;
 	}
 }
+

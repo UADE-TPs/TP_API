@@ -125,6 +125,7 @@ public class AltaUsuario extends JFrame {
 		dateChooser.setBounds(198, 162, 120, 20);
 		contentPane.add(dateChooser);
 		
+
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {				 
@@ -139,6 +140,7 @@ public class AltaUsuario extends JFrame {
 											//System.out.println("pass ok -- ALTA");
 											if (admUsr.generarUsr(Integer.parseInt(txtDoc.getText()), txtNom.getText(), txtApe.getText(), sqldate, txtEmail.getText(), new String(passField.getPassword()))==1) {
 												JOptionPane.showMessageDialog(null,  "Usuario dado de alta correctamente");
+												//SistemaMail.getInstancia().enviarMail(txtEmail.getText(),"Bienvenido/a", "Hola " + txtNom.getText() + "!\n\nBienvenido/a al sistema de listas de regalos. \n\n\nSldos!" );
 												dispose(); 
 											}
 											else {
@@ -197,10 +199,9 @@ public class AltaUsuario extends JFrame {
 	
 	private boolean VerificarFecha (JDateChooser f) {
 		try {
-			//SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy"); 
 			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 			String fecha = sdf.format(f.getDate());
-			System.out.println("fecha" + fecha);
+			//System.out.println("fecha" + fecha);
 			return true;
 		} catch(NullPointerException ex) {
 		     JOptionPane.showMessageDialog(null, "Falta seleccionar una fecha válida");
@@ -208,3 +209,4 @@ public class AltaUsuario extends JFrame {
 		}
 	}
 }
+
