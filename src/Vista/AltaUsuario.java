@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 
 import Controlador.AdmUsr;
+import Controlador.SistemaEmail;
 
 
 public class AltaUsuario extends JFrame {
@@ -140,7 +141,7 @@ public class AltaUsuario extends JFrame {
 											//System.out.println("pass ok -- ALTA");
 											if (admUsr.generarUsr(Integer.parseInt(txtDoc.getText()), txtNom.getText(), txtApe.getText(), sqldate, txtEmail.getText(), new String(passField.getPassword()))==1) {
 												JOptionPane.showMessageDialog(null,  "Usuario dado de alta correctamente");
-												//SistemaMail.getInstancia().enviarMail(txtEmail.getText(),"Bienvenido/a", "Hola " + txtNom.getText() + "!\n\nBienvenido/a al sistema de listas de regalos. \n\n\nSldos!" );
+												SistemaEmail.getInstancia().enviarMail(txtEmail.getText(),"Bienvenido/a", "Hola " + txtNom.getText() + "!\n\nBienvenido/a al sistema de listas de regalos. \n\n\nSldos!" );
 												dispose(); 
 											}
 											else {
