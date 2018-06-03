@@ -99,12 +99,13 @@ public class MapperLista {
 					ResultSet result = s.executeQuery();
 					while (result.next())
 					{
-						String nom = result.getString(2);
-						String ape = result.getString(3);
-						Date fn = result.getDate(4);
-						String mail = result.getString(5);
-						String pass = result.getString(6);
-						Boolean est = result.getBoolean(7);
+						String nom = result.getString(2); //Nombre Lista
+						int  dni = result.getInt(3); // dni Admin
+						Date fini = result.getDate(4); //fecha inicio
+						Date ffin = result.getDate(5); // fecha fin
+						int idAg = result.getInt(6);
+						float mont = result.getFloat(7);
+						Boolean est = result.getBoolean(8);
 						//l = new Lista(dni, nom, ape, fn,  mail, pass, est);
 						
 					}
@@ -114,11 +115,40 @@ public class MapperLista {
 				}
 				catch (Exception e)
 				{
-					System.out.println("Error en MapperUsusario - BuscarUsusario");
+					System.out.println("Error en Mapper - BuscarUsusario");
 					e.printStackTrace();
 				}
 				return null;
 			}
+
+			public int modificarDatosLista (Lista l) {
+				try
+				{
+					Connection con = PoolConnection.getPoolConnection().getConnection();
+					PreparedStatement s = con.prepareStatement("update API.dbo.Lista "
+							+ "set codLista = ?, montoARecaudar = ?, fechaInicio = ?, fechaFin = ?,"
+							+ " fechaAgasajo = ?,IdAgasajado = ?, mailAgasajado = ?,estado = ? where codLista = ?");
+					s.setInt(1,l.getCodigo());
+					s.setFloat(2,l.getMonto());
+					s.setDate(3,l.getfechaInicio());
+					s.setDate(4,l.getFechaFin());
+					s.setDate(5,l.getFechaAgasajo());
+					s.setString(6,l.getNombreAgasajado());
+					s.setString(7, l.getMailAgasajado());
+					s.setBoolean(8, l.getEstadoLista());
+					s.execute();			
+					PoolConnection.getPoolConnection().realeaseConnection(con);
+					return 1;
+				}
+				catch (Exception e)
+				{
+					System.out.println("Error en MapperLista - modificarDatosLista");
+					e.printStackTrace();
+				}
+				return 0;
+			}
+
+
 }				
 
 			
