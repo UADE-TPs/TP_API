@@ -28,22 +28,6 @@ public class ModifDatosUsr extends JFrame {
 	private JPasswordField passwordField;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ModifDatosUsr frame = new ModifDatosUsr();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public ModifDatosUsr() {

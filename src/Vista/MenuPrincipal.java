@@ -42,6 +42,13 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnLista);
 		
 		JMenuItem mntmNuevaLista = new JMenuItem("Nueva Lista");
+		mntmNuevaLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 PantallaAltaLista altaLista = new PantallaAltaLista();
+				altaLista.setLocationRelativeTo(null);
+				altaLista.setVisible(true);
+			}
+		});
 		mnLista.add(mntmNuevaLista);
 		
 		JMenu mnConfiguracin = new JMenu("Configuraci\u00F3n");

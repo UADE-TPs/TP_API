@@ -50,7 +50,7 @@ public class AdmUsr {
 	
 	public int  bajaUsr ()
 	{
-		//Cerrar todas listas que administras
+		//Cerrar todas listas que administra s
 		//Sacar de todas las listas que participa
 		return loggedUsr.bajaUsr();
 	}
@@ -70,5 +70,20 @@ public class AdmUsr {
 		return MapperUsuario.getInstancia().modificarDatosUsr(loggedUsr);
 	}
 
+	public Usuario buscarUsrXmail (String mail) {
+		Usuario u = buscarMail(mail);
+		if ( u == null) {
+			u = MapperUsuario.getInstancia().buscarUsuarioXmail(mail);	
+		}
+		return u;	
+	}
 	
+	public Usuario buscarMail (String m) {
+		for(Usuario u : usuarios) {
+            if (u.getMail().equals(m)) {
+            	return u;
+            };
+        }
+		return null;
+	}
 }
