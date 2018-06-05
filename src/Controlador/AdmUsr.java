@@ -30,7 +30,7 @@ public class AdmUsr {
 	public int generarUsr (int d, String n, String a, Date fn, String m, String p)
 	{
 		//Verificar que no exista en la BD
-		Usuario u = MapperUsuario.getInstancia().buscarUsuario(d);
+		Usuario u = buscarUsrxDoc(d);
 		if (u == null) {
 			u = new Usuario(d,n,a,fn,m, p);
 			usuarios.addElement(u);
@@ -70,6 +70,23 @@ public class AdmUsr {
 		return MapperUsuario.getInstancia().modificarDatosUsr(loggedUsr);
 	}
 
+	public Usuario buscarUsrxDoc (int doc) {
+		Usuario u = buscarDoc(doc);
+		if ( u == null) {
+			u = MapperUsuario.getInstancia().buscarUsuario(doc);	
+		}
+		return u;	
+	}
+	
+	public Usuario buscarDoc (int d) {
+		for(Usuario u : usuarios) {
+            if (u.getDni() == d) {
+            	return u;
+            };
+        }
+		return null;
+	}
+	
 	public Usuario buscarUsrXmail (String mail) {
 		Usuario u = buscarMail(mail);
 		if ( u == null) {

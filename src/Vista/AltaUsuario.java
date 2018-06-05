@@ -36,11 +36,9 @@ public class AltaUsuario extends JFrame {
 	private JTextField txtEmailConf;
 	private JPasswordField passField;
 	private JPasswordField passFieldConf;
-	private AdmUsr admUsr;
 
 
 	public AltaUsuario() {
-		admUsr = AdmUsr.getInstancia();
 
 		try {
 		
@@ -139,7 +137,7 @@ public class AltaUsuario extends JFrame {
 									if(VerificarEmail(txtEmail.getText(), txtEmailConf.getText())) {
 										if(VerificarPass(passField.getPassword(), passFieldConf.getPassword())) {
 											//System.out.println("pass ok -- ALTA");
-											if (admUsr.generarUsr(Integer.parseInt(txtDoc.getText()), txtNom.getText(), txtApe.getText(), sqldate, txtEmail.getText(), new String(passField.getPassword()))==1) {
+											if (AdmUsr.getInstancia().generarUsr(Integer.parseInt(txtDoc.getText()), txtNom.getText(), txtApe.getText(), sqldate, txtEmail.getText(), new String(passField.getPassword()))==1) {
 												JOptionPane.showMessageDialog(null,  "Usuario dado de alta correctamente");
 												SistemaEmail.getInstancia().enviarMail(txtEmail.getText(),"Bienvenido/a", "Hola " + txtNom.getText() + "!\n\nBienvenido/a al sistema de listas de regalos. \n\n\nSldos!" );
 												dispose(); 
