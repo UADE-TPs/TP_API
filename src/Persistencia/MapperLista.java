@@ -56,7 +56,7 @@ public class MapperLista {
 				sl.setString(6,l.getNombreAgasajado());
 			    sl.setDate(7, l.getFechaAgasajo());
 			    sl.setString(8, l.getMailAgasajado());
-			    sl.setBoolean(9, l.getEstadoLista());
+		//	    sl.setNString(9, l.getEstadoLista());
 			    
 			   // sl.setArray(10, l.getItemLista());;
 				sl.execute();
@@ -135,7 +135,7 @@ public class MapperLista {
 					s.setDate(5,l.getFechaAgasajo());
 					s.setString(6,l.getNombreAgasajado());
 					s.setString(7, l.getMailAgasajado());
-					s.setBoolean(8, l.getEstadoLista());
+			//		s.setBoolean(8, l.getEstadoLista());
 					s.execute();			
 					PoolConnection.getPoolConnection().realeaseConnection(con);
 					return 1;

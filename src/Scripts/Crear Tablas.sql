@@ -21,28 +21,19 @@ CREATE TABLE Pagos (
 		CONSTRAINT Pago_PK PRIMARY KEY(idPago)
 )
 
-
-CREATE TABLE Agasajados (
-	idAgasagado INT NOT NULL,
-	nombreAgasajado VARCHAR(60) NOT NULL,
-	fechaAgasajo DATE NOT NULL,
-	email VARCHAR(60) NOT NULL,
-	monto float NOT NULL,
-		CONSTRAINT Agasajado_PK PRIMARY KEY(idAgasagado)
-)
-
 CREATE TABLE Listas (
 	codLista INT NOT NULL,
 	nombreLista VARCHAR(60) NOT NULL,
 	dniAdmin INT NOT NULL,
 	fechaInicio DATE NOT NULL,
 	fechaFin DATE NOT NULL,
-	idAgasajado INT NOT NULL,
+	nombreAgasajado VARCHAR(60) NOT NULL,
+	fechaAgasajo DATE NOT NULL,
+	emailAgasajado VARCHAR(60) NOT NULL,
 	montoARecaudar float NOT NULL,
-	estado BIT NOT NULL,
+	estado char NOT NULL,
 		CONSTRAINT Lista_PK PRIMARY KEY(codLista),
-		CONSTRAINT ListaUsr_FK FOREIGN KEY(dniAdmin) REFERENCES Usuarios (dni),
-		CONSTRAINT ListaAga_FK FOREIGN KEY(idAgasajado) REFERENCES Agasajados (idAgasagado)
+		CONSTRAINT ListaUsr_FK FOREIGN KEY(dniAdmin) REFERENCES Usuarios (dni)
 )
 
 CREATE TABLE ItemsLista (

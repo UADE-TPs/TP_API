@@ -17,7 +17,8 @@ public class Lista {
 	private String nombreAgasajado;
 	private Date fechaAgasajo;
 	private String mailAgasajado;
-	private boolean estadoLista;
+	private char estadoLista; // A=activo / C=cerrada / B= dada de baja
+	
 	//			l = new Lista(c,u,m,f1,ff,n,fa,e);
 	public Lista (int codlista , Usuario admin, float montoARecaudar,
 			Date fechaInicio, Date fechaFin, String nombreAgasajado,
@@ -31,7 +32,7 @@ public class Lista {
 		this.fechaAgasajo=fechaAgasajo;
 		this.nombreAgasajado=nombreAgasajado;
 		this.mailAgasajado=mailAgasajado;
-		this.estadoLista=true;
+		this.estadoLista='A';
 		this.itemsLista=null;
 		MapperLista.getInstancia().insert(this);
 		//this.itemsLista =null;
@@ -39,7 +40,7 @@ public class Lista {
 	
 	}	
 	public void bajaLista() {
-		this.estadoLista=false;
+		this.estadoLista='B';
 		//return MapperLista.getInstancia().bajaLista(this.codLista);
 	}
 	//Getters/Setters
@@ -100,11 +101,11 @@ public class Lista {
 		this.mailAgasajado=m;
 	}
 
-	public boolean getEstadoLista() {
-		return true;
+	public char getEstadoLista() {
+		return this.estadoLista;
 	}
-	public void setEstadoLista() {
-		this.estadoLista=true;
+	public void setEstadoLista(char estado) {
+		this.estadoLista=estado;
 	}
 
 	public ItemLista getItemLista() {

@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="C:/Users/carlos.cagnani/Desktop/jcalendar-1.4/lib/junit-4.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/carlos.cagnani/Desktop/sqljdbc4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/carlos.cagnani/Downloads/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

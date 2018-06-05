@@ -2,6 +2,8 @@ package Vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,26 +18,10 @@ public class PantallaAgregaParticipanteLista extends JFrame {
 	private JTextField txtMail;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PantallaAgregaParticipanteLista frame = new PantallaAgregaParticipanteLista();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public PantallaAgregaParticipanteLista() {
-		setTitle("Nuevo participante lista");
+		setTitle("Sistema Lista de Regalos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 235);
 		contentPane = new JPanel();
@@ -48,13 +34,18 @@ public class PantallaAgregaParticipanteLista extends JFrame {
 		contentPane.add(lblMailUsuario);
 		
 		txtMail = new JTextField();
-		txtMail.setText("mail");
 		txtMail.setBounds(131, 90, 248, 20);
 		contentPane.add(txtMail);
 		txtMail.setColumns(10);
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(174, 147, 89, 23);
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//buscar email ingresado en USUARIOS para obtener ID-DNI
+				//ALTA ITEM: generarIten
+			}
+		});
 		contentPane.add(btnAceptar);
 	}
 }
