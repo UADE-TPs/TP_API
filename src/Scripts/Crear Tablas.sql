@@ -22,7 +22,7 @@ CREATE TABLE Pagos (
 )
 
 CREATE TABLE Listas (
-	codLista INT NOT NULL,
+	codLista INT IDENTITY NOT NULL,
 	nombreLista VARCHAR(60) NOT NULL,
 	dniAdmin INT NOT NULL,
 	fechaInicio DATE NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE Listas (
 )
 
 CREATE TABLE ItemsLista (
-	codItem INT NOT NULL,
+	codItem INT IDENTITY NOT NULL,
 	codLista INT NOT NULL,
 	dniParticipante INT NOT NULL,
 	idPago INT NULL,
