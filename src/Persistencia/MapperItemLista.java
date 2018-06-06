@@ -18,7 +18,8 @@ public class MapperItemLista {
 		return instancia;
 	}
 	
-	public void insert (ItemLista i) {
+	public void insert (int CodLista, ItemLista i) {
+		
 		
 	}
 	

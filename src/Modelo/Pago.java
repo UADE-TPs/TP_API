@@ -4,10 +4,12 @@ import java.sql.Date;
 
 public class Pago {
 	
+	private int idPago;
 	private Date fechaPago;
 	private float monto;
 	
-	public Pago (Date fchPago, float monto) {
+	public Pago (int id, Date fchPago, float monto) {
+		this.idPago = id;
 		this.fechaPago = fchPago;
 		this.monto = monto;
 	}
@@ -15,14 +17,11 @@ public class Pago {
 	public Date getFechaPago() {
 		return fechaPago;
 	}
-	public void setFechaPago(Date fechaPago) {
-		this.fechaPago = fechaPago;
-	}
 	public float getMonto() {
 		return monto;
 	}
-	public void setMonto(float monto) {
-		this.monto = monto;
+	public int getIdPago() {
+		return idPago;
 	}
 	
 	

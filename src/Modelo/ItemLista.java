@@ -2,6 +2,7 @@ package Modelo;
 
 public class ItemLista {
 	
+	private int codItem;
 	private Usuario particiante;
 	private Pago pago;
 	
@@ -22,6 +23,12 @@ public class ItemLista {
 		this.pago = pago;
 	}
 
+	public void setCodItem(int cod) {
+		this.codItem = codItem;
+	}
 
-
+	public int getCodItem() {
+		return this.codItem;
+	}
+	
 }
