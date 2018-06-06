@@ -98,7 +98,7 @@ public class Login extends JFrame {
 		contentPane.add(btnIngresar);
 		
 		JButton btnOlvidContrasea = new JButton("Olvid\u00E9 mi contrase\u00F1a");
-		btnOlvidContrasea.addActionListener(new ActionListener() {
+		btnOlvidContrasea.addActionListener(new ActionListener()  {
 			//Ir a la pantalla RecuperoContraseña
 			public void actionPerformed(ActionEvent e) {
 				 OlvideContraseña olvidePass = new OlvideContraseña();
