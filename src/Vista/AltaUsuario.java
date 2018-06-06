@@ -126,8 +126,9 @@ public class AltaUsuario extends JFrame {
 		
 
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {				 
+		//btnAceptar.addMouseListener(new MouseAdapter() {
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				 
 				if(VerificarTxt(txtNom.getText(), lblNombre.getText())) {
 					if(VerificarTxt(txtApe.getText(), lblApellido.getText())) {
 						if(VerificarTxt(txtDoc.getText(), lblDocumento.getText())) {
