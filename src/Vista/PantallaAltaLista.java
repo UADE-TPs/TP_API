@@ -9,8 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-
-
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -127,7 +125,7 @@ public class PantallaAltaLista extends JFrame {
 						if(VerificarTxt(txtMail.getText(), lblMailDelAgasajado.getText())) { //mail agasajado
 							if(VerificarMonto(textMonto.getText(),lblMonto.getText())) { //monto
 								if(VerificarFecha(fchAgsajo)) {
-									//verificar las tres fechas en orden12
+									//verificar las tres fechas en orden123
 									//Formato sql date
 									java.sql.Date fchAgsajosql = new java.sql.Date(fchAgsajo.getDate().getTime());
 									} 
