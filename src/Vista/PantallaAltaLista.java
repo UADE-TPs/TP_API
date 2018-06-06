@@ -127,7 +127,7 @@ public class PantallaAltaLista extends JFrame {
 						if(VerificarTxt(txtMail.getText(), lblMailDelAgasajado.getText())) { //mail agasajado
 							if(VerificarMonto(textMonto.getText(),lblMonto.getText())) { //monto
 								if(VerificarFecha(fchAgsajo)) {
-									//verificar las tres fechas en orden1
+									//verificar las tres fechas en orden12
 									//Formato sql date
 									java.sql.Date fchAgsajosql = new java.sql.Date(fchAgsajo.getDate().getTime());
 									} 
