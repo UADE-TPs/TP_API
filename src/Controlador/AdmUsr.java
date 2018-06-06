@@ -16,7 +16,7 @@ public class AdmUsr {
 
 	private AdmUsr()
 	{
-		usuarios = MapperUsuario.getInstancia().selectAll();
+		usuarios = new Vector<Usuario>();
 	}
 	
 	public static AdmUsr getInstancia()
@@ -73,7 +73,8 @@ public class AdmUsr {
 	public Usuario buscarUsrxDoc (int doc) {
 		Usuario u = buscarDoc(doc);
 		if ( u == null) {
-			u = MapperUsuario.getInstancia().buscarUsuario(doc);	
+			u = MapperUsuario.getInstancia().buscarUsuario(doc);
+			usuarios.add(u);
 		}
 		return u;	
 	}
@@ -90,7 +91,8 @@ public class AdmUsr {
 	public Usuario buscarUsrXmail (String mail) {
 		Usuario u = buscarMail(mail);
 		if ( u == null) {
-			u = MapperUsuario.getInstancia().buscarUsuarioXmail(mail);	
+			u = MapperUsuario.getInstancia().buscarUsuarioXmail(mail);
+			usuarios.add(u);
 		}
 		return u;	
 	}

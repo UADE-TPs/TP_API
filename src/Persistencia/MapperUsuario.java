@@ -24,24 +24,7 @@ public class MapperUsuario {
 		if (instancia == null)
 			instancia = new MapperUsuario();
 		return instancia;
-	}
-
-	public Vector<Usuario> selectAll()
-	{
-		try
-		{			
-			Vector<Usuario> usuarios;
-			usuarios = new Vector<Usuario>();
-			return usuarios;
-		}
-		catch (Exception e)
-		{
-			System.out.println("Error en MapperUsusario - selectAll");
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
+	}	
 
 	public void insert (Usuario u)
 	{
