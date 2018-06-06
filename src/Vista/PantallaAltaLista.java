@@ -9,23 +9,26 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+
+
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
-//import com.jgoodies.forms.layout.FormLayout;
-//import com.jgoodies.forms.layout.ColumnSpec;
-//import com.jgoodies.forms.layout.FormSpecs;
-//import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridLayout;
 import javax.swing.JSeparator;
+import Controlador.AdmUsr;
+import Controlador.SistemaEmail;
 
 public class PantallaAltaLista extends JFrame {
 
@@ -33,7 +36,7 @@ public class PantallaAltaLista extends JFrame {
 	private JTextField txtAgasajado;
 	private JTextField textMonto;
 	private JTextField txtMail;
-	private JTextField txtlista;
+	private JTextField txtLista;
 	public PantallaAgregaParticipanteLista Pmail;
 
 
@@ -49,38 +52,38 @@ public class PantallaAltaLista extends JFrame {
 		setContentPane(contentPane);
 
 		JLabel lblLista = new JLabel("Nombre de la lista");
-		lblLista.setBounds(9, 18, 155, 25);
+		lblLista.setBounds(9, 11, 155, 25);
 		contentPane.add(lblLista);
 		
-		txtlista = new JTextField();
-		txtlista.setBounds(168, 18, 244, 25);
-		contentPane.add(txtlista);
-		txtlista.setColumns(10);
+		txtLista = new JTextField();
+		txtLista.setBounds(168, 11, 244, 25);
+		contentPane.add(txtLista);
+		txtLista.setColumns(10);
 		
 		JLabel lblNombre = new JLabel("Nombre del agasajado");
-		lblNombre.setBounds(9, 28, 155, 25);
+		lblNombre.setBounds(9, 54, 155, 25);
 		contentPane.add(lblNombre);
 		
 		txtAgasajado = new JTextField();
-		txtAgasajado.setBounds(168, 28, 244, 25);
+		txtAgasajado.setBounds(168, 50, 244, 25);
 		contentPane.add(txtAgasajado);
 		txtAgasajado.setColumns(10);
 
 		JLabel lblFecha = new JLabel("Fecha de agasajo");
-		lblFecha.setBounds(9, 54, 120, 22);
+		lblFecha.setBounds(9, 79, 120, 22);
 		contentPane.add(lblFecha);
 		
 		JDateChooser fchAgsajo = new JDateChooser();
-		fchAgsajo.setBounds(168, 54, 241, 25);
+		fchAgsajo.setBounds(168, 76, 241, 25);
 		contentPane.add(fchAgsajo);
 		
 		JLabel lblMailDelAgasajado = new JLabel("Mail del agasajado");
-		lblMailDelAgasajado.setBounds(9, 74, 125, 25);
+		lblMailDelAgasajado.setBounds(9, 101, 125, 25);
 		contentPane.add(lblMailDelAgasajado);
 		
 		txtMail = new JTextField();
 		txtMail.setColumns(10);
-		txtMail.setBounds(168, 74, 244, 25);
+		txtMail.setBounds(168, 101, 244, 25);
 		contentPane.add(txtMail);
 		
 		
@@ -116,16 +119,72 @@ public class PantallaAltaLista extends JFrame {
 		contentPane.add(fchFin);
 		
 		JButton btnAgregarParticipante = new JButton("Agregar participante a la Lista");
+		btnAgregarParticipante.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//VERIFICAR DATOS INGRESADOS
+				if(VerificarTxt(txtLista.getText(), lblLista.getText())) { //nombre de lista
+					if(VerificarTxt(txtAgasajado.getText(), lblNombre.getText())) { //nombre agasajado
+						if(VerificarTxt(txtMail.getText(), lblMailDelAgasajado.getText())) { //mail agasajado
+							if(VerificarMonto(textMonto.getText(),lblMonto.getText())) { //monto
+								if(VerificarFecha(fchAgsajo)) {
+									//Formato sql date
+									java.sql.Date fchAgsajosql = new java.sql.Date(fchAgsajo.getDate().getTime());
+									} 
+							 } //fin monto
+						   } //fin mail agasajado
+						} //fin nombre agasajado 
+					} // fin nombre lista 			
+				} //fin verificación de campos
+				
+				 } 	//fin mouseClicked	btnAgregarParticipante	 
+			
+	);
 		btnAgregarParticipante.setBounds(9, 290, 424, 25);
 		contentPane.setLayout(null);
-		btnAgregarParticipante.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//VERIFICAR DATOS INGRESADOS
-				//ALTA LISTA: generarLista
-				Pmail =  new PantallaAgregaParticipanteLista();
-				Pmail.setVisible(true);
-			}
-		});
+		
+		// Bajo a BD los datos de la lista
 		contentPane.add(btnAgregarParticipante);
+		
+		/*JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(9, 50, 1, 2);
+		contentPane.add(separator_1);
+		*/
 	}
+// mtodos para validar campos
+private boolean VerificarTxt (String d, String lbl) {
+	if(d.isEmpty()) {
+		JOptionPane.showMessageDialog(null,  "Falta completar el campo " + lbl);
+		return false;
+	}
+	return true;
+}
+
+
+private boolean VerificarEmail (String m1, String m2) {
+	if(m1.isEmpty() || m2.isEmpty() || !m1.equals(m2)) {
+		JOptionPane.showMessageDialog(null,  "Los emails ingresados no coinciden o faltan completar");
+		return false;
+	}
+	return true;
+}
+
+private boolean VerificarFecha (JDateChooser f) {
+	try {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String fecha = sdf.format(f.getDate());
+		//System.out.println("fecha" + fecha);
+		return true;
+		} catch(NullPointerException ex) {
+	     JOptionPane.showMessageDialog(null, "Falta seleccionar una fecha válida");
+	     return false;		
+			}
+	}
+private boolean VerificarMonto (String m1, String m2) {
+	if(m1.isEmpty() || m2.isEmpty() || !m1.equals(m2)) {
+		JOptionPane.showMessageDialog(null,  "Los emails ingresados no coinciden o faltan completar");
+		return false;
+	}
+	return true;
+}
+	
 }
