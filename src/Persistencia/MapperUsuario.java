@@ -13,9 +13,10 @@ public class MapperUsuario {
 	
 	private static MapperUsuario instancia;
 	
+	
 	private MapperUsuario()
 	{
-		
+
 	}
 	
 	public static MapperUsuario getInstancia()
@@ -23,23 +24,7 @@ public class MapperUsuario {
 		if (instancia == null)
 			instancia = new MapperUsuario();
 		return instancia;
-	}
-
-	public Vector<Usuario> selectAll()
-	{
-		try
-		{
-			Vector<Usuario> usuarios = new Vector<Usuario>();
-			
-			return usuarios;
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
+	}	
 
 	public void insert (Usuario u)
 	{
@@ -168,6 +153,38 @@ public class MapperUsuario {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public Usuario buscarUsuarioXmail (String m)
+	{
+		try
+		{
+			Usuario u = null;
+			Connection con = PoolConnection.getPoolConnection().getConnection();
+			PreparedStatement s = con.prepareStatement("select * from API.dbo.Usuarios where mail = ?");
+			s.setString(1,m);
+			ResultSet result = s.executeQuery();
+			while (result.next())
+			{
+				int dni = result.getInt(1);
+				String nom = result.getString(2);
+				String ape = result.getString(3);
+				Date fn = result.getDate(4);
+				String mail = result.getString(5);
+				String pass = result.getString(6);
+				Boolean est = result.getBoolean(7);
+				u = new Usuario(dni, nom, ape, fn,  mail, pass, est);
+			}
+			
+			PoolConnection.getPoolConnection().realeaseConnection(con);
+			return u;
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error en MapperUsusario - BuscarUsusario");
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
 

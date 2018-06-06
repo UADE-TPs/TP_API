@@ -16,7 +16,8 @@ public class AdmUsr {
 
 	private AdmUsr()
 	{
-		usuarios = MapperUsuario.getInstancia().selectAll();
+		
+		usuarios = new Vector<Usuario>();
 	}
 	
 	public static AdmUsr getInstancia()
@@ -30,7 +31,7 @@ public class AdmUsr {
 	public int generarUsr (int d, String n, String a, Date fn, String m, String p)
 	{
 		//Verificar que no exista en la BD
-		Usuario u = MapperUsuario.getInstancia().buscarUsuario(d);
+		Usuario u = buscarUsrxDoc(d);
 		if (u == null) {
 			u = new Usuario(d,n,a,fn,m, p);
 			usuarios.addElement(u);
@@ -50,7 +51,7 @@ public class AdmUsr {
 	
 	public int  bajaUsr ()
 	{
-		//Cerrar todas listas que administras
+		//Cerrar todas listas que administra s
 		//Sacar de todas las listas que participa
 		return loggedUsr.bajaUsr();
 	}
@@ -70,5 +71,39 @@ public class AdmUsr {
 		return MapperUsuario.getInstancia().modificarDatosUsr(loggedUsr);
 	}
 
+	public Usuario buscarUsrxDoc (int doc) {
+		Usuario u = buscarDoc(doc);
+		if ( u == null) {
+			u = MapperUsuario.getInstancia().buscarUsuario(doc);
+			usuarios.add(u);
+		}
+		return u;	
+	}
 	
+	public Usuario buscarDoc (int d) {
+		for(Usuario u : usuarios) {
+            if (u.getDni() == d) {
+            	return u;
+            };
+        }
+		return null;
+	}
+	
+	public Usuario buscarUsrXmail (String mail) {
+		Usuario u = buscarMail(mail);
+		if ( u == null) {
+			u = MapperUsuario.getInstancia().buscarUsuarioXmail(mail);
+			usuarios.add(u);
+		}
+		return u;	
+	}
+	
+	public Usuario buscarMail (String m) {
+		for(Usuario u : usuarios) {
+            if (u.getMail().equals(m)) {
+            	return u;
+            };
+        }
+		return null;
+	}
 }
