@@ -1,8 +1,6 @@
 use [API]
 go
 
-begin tran
-
 CREATE TABLE Usuarios (
 	dni INT NOT NULL,
 	nombre VARCHAR(60) NOT NULL,
@@ -11,8 +9,10 @@ CREATE TABLE Usuarios (
 	mail VARCHAR(60) NOT NULL,
 	pass  VARCHAR(15) NOT NULL,
 	estado BIT NOT NULL, 
-		CONSTRAINT Usr_PK PRIMARY KEY(dni)
+		CONSTRAINT Usr_PK PRIMARY KEY(dni),
+		
 )
+CREATE NONCLUSTERED INDEX IX_Usr_Email ON Usuarios (mail); 
 
 CREATE TABLE Pagos (
 	idPago INT NOT NULL,
