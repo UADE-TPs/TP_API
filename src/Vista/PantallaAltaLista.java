@@ -1,6 +1,7 @@
 package Vista;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,12 +13,14 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -27,7 +30,9 @@ import java.awt.GridLayout;
 import javax.swing.JSeparator;
 import Controlador.AdmUsr;
 import Controlador.SistemaEmail;
-
+import Modelo.Usuario;
+import Persistencia.MapperUsuario;
+import Controlador.AdmLista;
 public class PantallaAltaLista extends JFrame {
 
 	private JPanel contentPane;
@@ -36,7 +41,7 @@ public class PantallaAltaLista extends JFrame {
 	private JTextField txtMail;
 	private JTextField txtLista;
 	public PantallaAgregaParticipanteLista Pmail;
-
+	
 
 	/**
 	 * Create the frame.
@@ -124,23 +129,39 @@ public class PantallaAltaLista extends JFrame {
 					if(VerificarTxt(txtAgasajado.getText(), lblNombre.getText())) { //nombre agasajado
 						if(VerificarTxt(txtMail.getText(), lblMailDelAgasajado.getText())) { //mail agasajado
 							if(VerificarMonto(textMonto.getText(),lblMonto.getText())) { //monto
-								if(VerificarFecha(fchAgsajo)) {
+								if(VerificarFecha(fchAgsajo) & (VerificarFecha(fchFin) & VerificarFecha(fchInicio))) {
 									//verificar las tres fechas en orden123
 									//Formato sql date
 									java.sql.Date fchAgsajosql = new java.sql.Date(fchAgsajo.getDate().getTime());
-									} 
-							 } //fin monto
-						   } //fin mail agasajado
-						} //fin nombre agasajado 
-					} // fin nombre lista 			
-				} //fin verificación de campos
+									java.sql.Date fchIniciosql = new java.sql.Date(fchInicio.getDate().getTime());
+									java.sql.Date fchFinsql = new java.sql.Date(fchFin.getDate().getTime());
+  									int codNuevaLista = AdmLista.getInstancia().generarLista(
+											txtLista.getText(), 					//nombreLista
+											AdmUsr.getInstancia().loggedUsr(), 		//Usr admistrador de la lista
+											Float.parseFloat(textMonto.getText()),	//montoARecaudar
+											fchIniciosql,							//fechainicio
+											fchFinsql,								//fechaFin
+											fchAgsajosql,							//fechaAgasajo
+											txtAgasajado.getText(), 				//nombreAgasajado
+											txtMail.getText());						//emailAgasajado
+									if (codNuevaLista >0) {					
+  										JOptionPane.showMessageDialog(null,  "Se ha generado una nueva lista de Regalos");
+  										PantallaAgregaParticipanteLista nuevoPartic = new PantallaAgregaParticipanteLista(codNuevaLista);
+  										nuevoPartic.setLocationRelativeTo(null);
+  										nuevoPartic.setVisible(true);
+  										dispose();
+  									}
+								}  //fin generar
+							 } //fin fechaAgasajo
+						   } //fin monto
+						} //fin mail 
+					} // fin nombre agasajado 			
+				} //fin nombre lista
 				
-				 } 	//fin mouseClicked	btnAgregarParticipante	 
-			
+			} 	//fin mouseClicked	btnAgregarParticipante	 
 	);
 		btnAgregarParticipante.setBounds(9, 290, 424, 25);
 		contentPane.setLayout(null);
-		
 		// Bajo a BD los datos de la lista
 		contentPane.add(btnAgregarParticipante);
 		
@@ -175,14 +196,21 @@ private boolean VerificarFecha (JDateChooser f) {
 		return true;
 		} catch(NullPointerException ex) {
 	     JOptionPane.showMessageDialog(null, "Falta seleccionar una fecha válida");
-	     return false;		
+	     return true;		
 			}
 	}
 private boolean VerificarMonto (String m1, String m2) {
-	if(m1.isEmpty() || m2.isEmpty() || !m1.equals(m2)) {
-		JOptionPane.showMessageDialog(null,  "Los emails ingresados no coinciden o faltan completar");
+	if(m1.isEmpty()) {              
+		JOptionPane.showMessageDialog(null,  "El monto ingresado es incorrecto");
 		return false;
-	}
+		}
+		else {
+			float f = Float.parseFloat(m1);
+			if (f <=0) {
+				JOptionPane.showMessageDialog(null,  "El monto ingresado tiene que ser mayo a 0");
+				return false;
+			}
+		}
 	return true;
 }
 	

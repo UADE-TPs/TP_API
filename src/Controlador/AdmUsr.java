@@ -15,8 +15,7 @@ public class AdmUsr {
 	private  Usuario loggedUsr;
 
 	private AdmUsr()
-	{
-		
+	{	
 		usuarios = new Vector<Usuario>();
 	}
 	
@@ -81,29 +80,40 @@ public class AdmUsr {
 	}
 	
 	public Usuario buscarDoc (int d) {
-		for(Usuario u : usuarios) {
-            if (u.getDni() == d) {
-            	return u;
-            };
-        }
+		if (!usuarios.isEmpty()) {
+			for(Usuario u : usuarios) {
+	            if (u.getDni() == d) {
+	            	return u;
+	            };
+	        }
+		}
 		return null;
 	}
 	
 	public Usuario buscarUsrXmail (String mail) {
+		System.out.println("llama buscarMail");
 		Usuario u = buscarMail(mail);
+		System.out.println("verifica si encontro buscarMail");
 		if ( u == null) {
+			System.out.println("llama mapper");
 			u = MapperUsuario.getInstancia().buscarUsuarioXmail(mail);
-			usuarios.add(u);
+			if ( u != null) {
+				usuarios.add(u);
+				System.out.println("usr" + u.getMail());
+			}
 		}
 		return u;	
 	}
 	
 	public Usuario buscarMail (String m) {
-		for(Usuario u : usuarios) {
-            if (u.getMail().equals(m)) {
-            	return u;
-            };
-        }
+		if (!usuarios.isEmpty()) {
+			for(Usuario u : usuarios) {
+				System.out.println("for");
+	            if (u.getMail().equals(m)) {
+	            	return u;
+	            };
+	        }
+		}
 		return null;
 	}
 }

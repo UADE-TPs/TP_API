@@ -102,7 +102,7 @@ public class ModifDatosUsr extends JFrame {
 					dispose(); 
 				}
 				else {
-					JOptionPane.showMessageDialog(null,  "Hubo un error al modificar los datos");
+					JOptionPane.showMessageDialog(null,  "Hubo un error al modificar tus datos");
 					dispose(); 
 				}
 			}

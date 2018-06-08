@@ -37,11 +37,10 @@ CREATE TABLE Listas (
 )
 
 CREATE TABLE ItemsLista (
-	codItem INT IDENTITY NOT NULL,
 	codLista INT NOT NULL,
 	dniParticipante INT NOT NULL,
 	idPago INT NULL,
-		CONSTRAINT Item_PK PRIMARY KEY(codLista, codItem ),
+		CONSTRAINT Item_PK PRIMARY KEY(codLista, dniParticipante ),
 		CONSTRAINT ItemList_FK FOREIGN KEY(codLista) REFERENCES Listas (codLista),
 		CONSTRAINT ItemUsr_FK FOREIGN KEY(dniParticipante) REFERENCES Usuarios (dni),
 		CONSTRAINT ItemPago_FK FOREIGN KEY(idPago) REFERENCES Pagos (idPago),

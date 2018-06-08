@@ -77,7 +77,7 @@ public class MapperUsuario {
 		}
 		catch (Exception e)
 		{
-			System.out.println("Error en MapperUsusario - BuscarUsusario");
+			System.out.println("Error en MapperUsusario - BuscarUsusario-000");
 			e.printStackTrace();
 		}
 		return null;

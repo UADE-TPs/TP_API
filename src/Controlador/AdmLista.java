@@ -7,18 +7,24 @@ import Modelo.Lista;
 import Persistencia.MapperLista;
 import Persistencia.MapperUsuario;
 import Modelo.Usuario;
-
+import Modelo.ItemLista;
+import Modelo.Pago;
 
 
 public class AdmLista {
 	
-	private Vector<Lista> listas;
+	private Vector<Lista> listasAdm;
+	private Vector<Lista> listasPar;
+	private Vector<String> nombListasAdm;
+	private Vector<String> nombListasPar;
 	private static AdmLista instancia;
-	private Lista l;
+
 	
 	private AdmLista(){
-		listas = MapperLista.getInstancia().selectAll();
-		
+		listasAdm = MapperLista.getInstancia().selectListasAdm(AdmUsr.getInstancia().loggedUsr().getDni());
+		listasPar = MapperLista.getInstancia().selectListasPar(AdmUsr.getInstancia().loggedUsr().getDni());
+		nombListasAdm = armarVectorNombres (listasAdm);
+		nombListasPar = armarVectorNombres (listasPar);
 	}
 	
 	public static AdmLista getInstancia()
@@ -28,63 +34,108 @@ public class AdmLista {
 		return instancia;
 	}
 //Alta de la lista 
-	public int generarLista (int c, Usuario u, float m, Date f1, Date ff, String n, Date fa, String e) 
+
+	public int generarLista (String nomLis, Usuario usr, float mont, Date fchini, Date fchfin, Date fchaga, String nomaga, String mail) 
 	{
-		//Verificar que no exista en la BD
-		Lista l = MapperLista.getInstancia().buscarLista(u.getDni());
-		if (l == null) {
-			l = new Lista(c,u,m,f1,ff,n,fa,e);
-			listas.addElement(l);
+		//Creamos la lista en la BD
+		Lista l = new Lista(nomLis, usr, mont, fchini, fchfin, fchaga, nomaga, mail);
+		listasAdm.addElement(l);
+		return l.getCodigo();
+	}
+	
+	public int generarItemLista (int cl, Usuario p) 
+	{
+		//Creamos la Itemlista en la BD
+		ItemLista il = new ItemLista(cl,p);
+		System.out.println("creo item");
+		insertarItemEnList(il);
+		return 1;
+	}
+		
+
+	public int darDeBajaLista (Lista l)
+	{
+		if (MapperLista.getInstancia().bajaLista(l.getCodigo()) == 1) {
+			eliminarListaNombreLista(l.getNombreLista());
+			listasAdm.remove(listasAdm.indexOf(l));	
 			return 1;
 		}
 		return 0;
-		
 	}
-
-	public int  bajaLista ()
-	{
-		//Cambiar el estad de la lista a inactiva
-		return 0;
+	
+	private void insertarItemEnList (ItemLista il) {
+		System.out.println("busco lista");
+		Lista l = buscarLista(il.getcodLista());
+		System.out.println("agrego item");
+		l.insertarItem(il);
 	}
+	
 	public Lista buscarLista(int c)
 	{
-		return MapperLista.getInstancia().buscarLista(c);
+		Lista l = buscarCod(c);
+		if ( l == null) {
+			l = MapperLista.getInstancia().buscarLista(c);;
+			listasAdm.add(l);
+		}
+		return l;
 	}
 	
-	public int modificarLista (int cod, int monto, Date fchIni, Date fechFin, Date fechAga,
-			String nomAga, String mailAga)
-	{
-		l=buscarLista(cod);
-		l.setMonto(monto);
-		l.setfechaInicio(fchIni);
-		l.setFechaFin(fechFin);
-		l.setFechaAgasajo(fechAga);
-		l.setMailAgasajado(mailAga);
+	public Lista buscarCod (int c) {
+		if (!listasAdm.isEmpty()) {
+			for(Lista l : listasAdm) {
+	            if (l.getCodigo() == c) {
+	            	return l;
+	            };
+	        }
+		}
+		return null;
+	}
 	
+	public Lista buscarListaXNombre (String n) {
+		if (!listasAdm.isEmpty()) {
+			for(Lista l : listasAdm) {
+	            if (l.getNombreLista().equals(n)) {
+	            	return l;
+	            };
+	        }
+		}
+		return null;
+	}
+	
+	public int modificarLista (Lista l)
+	{	
 		return MapperLista.getInstancia().modificarDatosLista(l);
 	}
-
-
-
-
+	
+	public Vector<String> devolverNombreListasAdm () {	
+		return nombListasAdm;
+	}
+	
+	public Vector<String> devolverNombreListasPar () {
+		return nombListasPar;
+	}
+	
+	private Vector<String> armarVectorNombres (Vector<Lista> lista) {
+		Vector<String> listNom = new Vector<String> ();
+		for(Lista l : lista) {
+			listNom.addElement( l.getNombreLista());
+			 System.out.println("nombre " + l.getNombreLista());
+            }		
+		return listNom;
+	}
+	
+	private void eliminarListaNombreLista (String n) {
+		System.out.println("eliminarListaNombreLista");
+		String del = null;
+		for(String l : nombListasAdm) {
+			if (l.equals(n)) {
+				System.out.println("encontro ");
+				del = l;
+			}
+        }
+		if (del != null && nombListasAdm.remove(del)) {
+			System.out.println("removio ok ");
+		}
+	}
 
 }
-
-
-
-
-/*
-	generarLista(Ususario a, float m, Date fi, Date ff, String n, Date fa, String e): Lista
-	obtenerLista(int codLista): Lista
-	eliminarLista(Lista l): int
-	modificarMontoARecaudar(Lista l, float m): int
-	agregarPagoAParticLista(int codLista, Usuario u, Pago p): int
-	modificarFchInicio(Lista l, Date f): int
-	modificarNombAgasajado(Lista l, String n): int
-	modificarFchAgasajo(Lista l, Date f): int
-	modificarmailAgasajado(Lista l, String m): int
-	
-	
-	
-*/
-

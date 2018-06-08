@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import Controlador.AdmLista;
 import Controlador.AdmUsr;
+import Modelo.Lista;
 import Persistencia.PoolConnection;
 
 import javax.swing.JToolBar;
@@ -21,6 +23,7 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
@@ -95,18 +98,14 @@ public class MenuPrincipal extends JFrame {
 		mnSistema.add(mntmSalir);
 		getContentPane().setLayout(null);
 		
-		// PRUEBA ARMADO dE LISTAS
-		
-		String[] datos = {"Rojo", "Verde", "Azul", "Blanco", "A", "b", "Rojo", "Verde", "Azul", "Blanco", "A", "b","Rojo", "Verde", "Azul", "Blanco", "A", "b"};
-		Integer[] idListas = {11,55,2,36,8,4,5,7,4,10,84,4,5,52,69,748,512,97};
-		
-		// LISTAS ADMINISTRADAS
+		// LISTAS ADMINISTRADAS ***************************************************************
+
 		
 		JLabel lblListasAdministradas = new JLabel("Listas administradas");
 		lblListasAdministradas.setBounds(10, 22, 244, 14);
 		getContentPane().add(lblListasAdministradas);
 		
-		JList listAdm = new JList(datos);
+		JList listAdm = new JList(AdmLista.getInstancia().devolverNombreListasAdm());
 		listAdm.setBounds(10, 47, 244, 227);
 		getContentPane().add(listAdm);
 		
@@ -119,17 +118,22 @@ public class MenuPrincipal extends JFrame {
 		listAdm.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				 System.out.println("VAlor " + idListas[listAdm.getSelectedIndex()]);
-				 }
+				System.out.println("VAlor " + listAdm.getSelectedValue().toString());
+				ModificarLista modifLista = new ModificarLista(listAdm.getSelectedValue().toString());
+				modifLista.setLocationRelativeTo(null);
+				modifLista.setVisible(true);
+			}
 		});
 		
-		//LISTAS PARTICIPADAS
+		//LISTAS PARTICIPADAS ***************************************************************
+		
+		Vector<String> listasPar = AdmLista.getInstancia().devolverNombreListasPar();
 		
 		JLabel lblListasEnLas = new JLabel("Listas en las que participo");
 		lblListasEnLas.setBounds(303, 22, 244, 14);
 		getContentPane().add(lblListasEnLas);
 		
-		JList listPar = new JList(idListas);
+		JList listPar = new JList(listasPar);
 		listPar.setBounds(303, 47, 244, 227);
 		getContentPane().add(listPar);
 		
@@ -142,7 +146,7 @@ public class MenuPrincipal extends JFrame {
 		listPar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				 System.out.println("VAlor " + idListas[listPar.getSelectedIndex()]);
+				System.out.println("Pendiente de programa - Pago de la lista en la que participo");
 				 }
 		});
 		// FIN PRUEBA

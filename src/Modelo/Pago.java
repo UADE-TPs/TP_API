@@ -6,26 +6,30 @@ public class Pago {
 	
 	private int idPago;
 	private Date fechaPago;
-	private float monto;
+	private int monto;
 	
-	public Pago (int id, Date fchPago, float monto) {
+	public Pago (int id, Date fchPago, int monto) {
 		this.idPago = id;
 		this.fechaPago = fchPago;
 		this.monto = monto;
+	}
+
+	public Pago () {
+		this.idPago = 0;
+		this.monto = 0;
+
 	}
 	
 	public Date getFechaPago() {
 		return fechaPago;
 	}
-	public float getMonto() {
+	public int getMonto() {
 		return monto;
 	}
 	public int getIdPago() {
 		return idPago;
 	}
 	
-	
-
 	
 	
 }
