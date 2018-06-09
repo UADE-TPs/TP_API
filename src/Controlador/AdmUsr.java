@@ -91,8 +91,8 @@ public class AdmUsr {
 	}
 	
 	public Usuario buscarUsrXmail (String mail) {
-		System.out.println("llama buscarMail");
-		Usuario u = buscarMail(mail);
+		System.out.println("llama buscarMail 777");
+		Usuario u = null; //buscarMail(mail);
 		System.out.println("verifica si encontro buscarMail");
 		if ( u == null) {
 			System.out.println("llama mapper");
@@ -108,12 +108,14 @@ public class AdmUsr {
 	public Usuario buscarMail (String m) {
 		if (!usuarios.isEmpty()) {
 			for(Usuario u : usuarios) {
-				System.out.println("for");
+				System.out.println("for " + u.getMail());
 	            if (u.getMail().equals(m)) {
+	            	System.out.println("igualllll");
 	            	return u;
-	            };
-	        }
+	            }
+			}
 		}
+		System.out.println("fuera if");
 		return null;
 	}
 }
